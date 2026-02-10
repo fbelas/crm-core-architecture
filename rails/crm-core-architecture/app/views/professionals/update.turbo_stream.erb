@@ -1,0 +1,14 @@
+<% @status_change_reason_value =
+        if (@professional.STATUS_CHANGE_REASON == "5") && (@professional.STATUS == "ACTV")
+            "12"
+        else
+            @professional.STATUS_CHANGE_REASON
+        end
+%>
+
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+<%= turbo_stream.replace @professional, partial: "professionals/edit_form", locals:{status_change_reason_value: @status_change_reason_value} %>
+<%= turbo_stream.replace('institution_affiliation_list_container', partial: "professionals/prof_dept_affiliations_section_table") %>
+<% if @professional.valid? %>
+    <%#= turbo_stream.replace 'prof_dept_affiliations_section', partial: "professionals/_prof_dept_affiliations_section" %>
+<% end %>

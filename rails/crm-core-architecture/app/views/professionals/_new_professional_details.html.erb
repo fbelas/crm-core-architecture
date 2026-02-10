@@ -1,0 +1,28 @@
+<%= f.fields_for :professional_details do |pd| %>
+    <div class="row">
+        <div class="col-sm-2">
+            <%= pd.input :PREFIX, as: :select, collection: @professional_details_prefix_list_for_select,
+                input_html:{
+                    data: {controller: "select2"},
+                    disabled: current_user.can_do?("database_edit") ? nil : "disabled"
+                } %>
+        </div>
+        <div class="col-sm-4">
+            <%= pd.input :TITLE, as: :select, collection: @professional_details_title_list_for_select,
+                input_html:{
+                    data: {controller: "select2"},
+                    disabled: current_user.can_do?("database_edit") ? nil : "disabled"
+                } %>
+        </div>
+        <div class="col-sm-2">
+            <%= pd.input :GENDER, as: :select, collection: @professional_details_gender_list_for_select,
+                input_html:{
+                    data: {controller: "select2"},
+                    disabled: current_user.can_do?("database_edit") ? nil : "disabled"
+                } %>
+        </div>
+        <div class="col-sm-4">
+           <%= pd.input :BIRTH_DATE, as: :string %>
+        </div>
+    </div>
+<%end%>

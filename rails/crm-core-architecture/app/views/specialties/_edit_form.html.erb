@@ -1,0 +1,33 @@
+<%= turbo_frame_tag "generic_responsive_modal" do %>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= I18n.t("label_specialties.fill_the_fields_for_update_specialty") %></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: bolder; font-size: 30px;">
+            </div>
+            <%= simple_form_for @specialty, url: professional_specialty_path(@professional.CUSTOMER_ID) do |f| %>
+                <%= I18n.t("label_specialties.fill_the_fields_for_new_specialty") %>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-2">
+                        <%= f.input :SPECIALTY_RANK, as: :select, collection: (1..@professional.specialties.count).to_a,
+                            input_html: {data: { controller: "select2"} } %>
+                    </div>
+                    <div class="col-md-6">
+                        <%= f.input :SPECIALTY, as: :select, collection: @specialties_list_for_select,
+                            input_html: { data: { controller: "select2"} } %>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group" style="margin-top: 29px;">
+                            <button class="btn btn-dark_green" type="submit"><i class="fa-solid fa-check"></i></button>
+
+                            <%= button_tag type: :button, class: "btn btn-dark_danger", data: {action: "formtoggle#toggleTargets", dismiss:"modal"} do %>
+                                <i class="fa-solid fa-ban"></i>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>

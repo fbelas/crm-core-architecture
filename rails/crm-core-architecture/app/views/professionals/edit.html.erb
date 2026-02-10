@@ -1,0 +1,104 @@
+<style>
+    hr {
+        height: 2px;
+        background-color: #5fbeaa;
+    }
+</style>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div>
+                <h4>
+                    <i class="fa-solid fa-file-user"></i> <%= @professional.FULL_NAME %>
+                </h4>
+                <h5>
+                    <%= I18n.t("label_institutions.onepharma_id") %> -
+                    <%= @professional.CUSTOMER_ID %>
+                </h5>
+                <h6>
+                    <%= I18n.t("label_professionals.created_at")%>
+                    <%= @professional.CREATION_DATE %>
+                </h6>
+                <h6>
+                    <%= I18n.t("label_institutions.updated_at")%>
+                    <%= @professional.UPDATE_DATE %>
+                </h6>
+            </div>
+            <hr>
+        </div>
+        <div class="col-md-5" style="margin-bottom: -65px">
+            <% if current_user.can_do?("manage_tickets") || current_user.can_do?("manage_only_team_tickets")  || current_user.can_do?("create_tickets") %>
+                <div class="card-box">
+                    <%= render 'tickets_section' %>
+                </div>
+            <% end %>
+        </div>
+        <hr>
+    </div>
+    <ul class="nav nav-tabs tabs-bordered">
+        <li class="nav-item">
+            <a href="#basic_information_fields-b1" data-toggle="tab" aria-expanded="false" class="nav-link active show" style="color:#caced2 !important">
+                <%= I18n.t("label_institutions.data") %>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#departments-b1" data-toggle="tab" aria-expanded="true" class="nav-link" style="color:#caced2 !important">
+                <%= I18n.t("label_affiliations.affiliations") %>
+            </a>
+        </li>
+        <% if current_user.can_do?("view_log_records") %>
+            <li class="nav-item">
+                <a href="#history-b1" data-toggle="tab" aria-expanded="true" class="nav-link" style="color:#caced2 !important">
+                    <%= I18n.t("labels.last_updates") %>
+                </a>
+            </li>
+        <% end %>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade active show" id="basic_information_fields-b1">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card-box">
+                        <%= render "professionals/edit_form" %>
+                    </div>
+                </div>
+                <div class="col-6" >
+                    <div class="card-box">
+                        <%= render 'professionals/record_note_section' %>
+                    </div>
+                    <div class="card-box">
+                        <%= render 'professionals/contact_section'%>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card-box">
+                        <%= render 'professionals/specialty_section' %>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card-box">
+                        <%= render 'professionals/competency_section' %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="departments-b1">
+            <div class="card-box">
+                <%= render 'professionals/prof_dept_affiliations_section' %>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="history-b1">
+            <div class="card-box">
+                <%= render 'professionals/log_records_section' %>
+            </div>
+        </div>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#generic_responsive_modal').on('shown.bs.modal', function () {
+        $('.filestyle').filestyle();
+        });
+    });
+</script>

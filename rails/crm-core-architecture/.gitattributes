@@ -1,0 +1,3 @@
+*.rb linguist-language=Ruby
+*.erb linguist-language=HTML+ERB
+*.js linguist-language=JavaScript

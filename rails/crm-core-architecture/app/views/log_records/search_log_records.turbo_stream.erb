@@ -1,0 +1,7 @@
+<%# Para lidar-mos com a quantidade de dados %>
+<%# foi necessario construir o objecto para preencher as linhas da tabela %>
+<%# que depois passa para o stimulus %>
+
+
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+<%= turbo_stream.replace 'log_records_searched_table_container', partial: "log_records_section" %>

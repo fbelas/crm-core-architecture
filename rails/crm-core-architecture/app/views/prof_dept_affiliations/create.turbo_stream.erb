@@ -1,0 +1,7 @@
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+<% if @new_prof_dept_affiliation.valid? %>
+    <%= turbo_stream.prepend 'new_onepharma_prof_dept_affiliation', inline: "<div data-formtoggle-target='clear'></div>" %>
+    <%= turbo_stream.replace('institution_affiliation_list_container', partial: "professionals/prof_dept_affiliations_section_table") %>
+<% else %>
+    <%= turbo_stream.replace 'new_onepharma_prof_dept_affiliation', partial: "prof_dept_affiliations/departments_for_select_form" %>
+<% end %>
