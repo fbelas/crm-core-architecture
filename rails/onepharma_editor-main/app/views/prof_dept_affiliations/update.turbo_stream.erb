@@ -1,8 +1,0 @@
-<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
-<% if @prof_dept_affiliation.valid? %>
-	<%= turbo_stream.replace "institution_affiliation_list_container", partial: "professionals/prof_dept_affiliations_section_table" %>
-    <%= turbo_stream.update "generic_responsive_modal", inline: "<div data-modal-target='close'></div>" %>
-	<%= turbo_stream.replace 'institution_department_professionals_section', partial: "professionals/prof_dept_affiliations_section" %>
-<% else %>
- 	<%= turbo_stream.replace "generic_responsive_modal", partial: "prof_dept_affiliations/edit_form", locals: { elem: @prof_dept_affiliation } %>
-<% end %>

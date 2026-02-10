@@ -1,7 +1,0 @@
-<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
-<%if @new_prof_dept_affiliation.valid? %>
-    <%= turbo_stream.replace "new_onepharma_prof_dept_affiliation_#{@professional.CUSTOMER_ID}", partial: "prof_dept_affiliations/affiliation_already_created" %>
-    <%= turbo_stream.replace 'institution_department_professionals_section', partial: "institutions/inst_dept_prof_affiliations_section" %>
-<% else %>
-    <%#= turbo_stream.replace 'professional_searched_table', partial: "prof_dept_affiliations/modals/institution_add_new_prof_dept_affiliation_table" %>
-<% end %>
