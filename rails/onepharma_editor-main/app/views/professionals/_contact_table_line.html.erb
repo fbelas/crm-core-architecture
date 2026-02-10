@@ -1,0 +1,25 @@
+<tr class="row department_line align-items-center <%= "label-light_dark_danger" if elem.CAN_USE != '1' %>" style="display: table-row;"
+    id="<%= dom_id(elem) %>">
+    <td>
+        <span><%= I18n.t("label_contacts.#{elem.CONTACT_TYPE}")  %></span>
+    </td>
+    <td>
+        <%= elem.CONTACT_VALUE %>
+    </td>
+    <% if current_user.can_do?("database_edit") %>
+        <td style="white-space:nowrap;">
+            <%= link_to edit_professional_contact_path(@professional.CUSTOMER_ID, elem.CUSTOMER_CONTACT_ID.to_s),
+                        class: "btn btn-dark_green inactive_button_border",
+                        style: "#{elem.CAN_USE == '1' ? '': 'border: 1px solid #a38989  !important;'}",
+                        data: {turbo_frame: "generic_responsive_modal"} do  %>
+                <span><i class="fa-solid fa-pen"></i></span>
+            <% end %>
+            <%= link_to professional_contact_path(@professional.CUSTOMER_ID, elem.CUSTOMER_CONTACT_ID.to_s),
+                        class: "btn btn-dark_danger inactive_button_border",
+                        style: "#{elem.STATUS != 'ACTV' ? 'border: 1px solid #a38989  !important;' : '' }",
+                        data:{turbo_confirm: t("popup_alerts.confirm_delete_contact"), turbo_method: :delete} do  %>
+                <span><i class="fa-solid fa-trash"></i></span>
+            <% end %>
+        </td>
+    <% end %>
+</tr>

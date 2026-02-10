@@ -1,0 +1,8 @@
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+
+<% if @specialty.valid? %>
+    <%= turbo_stream.replace 'specialties_section', partial: "professionals/specialty_section" %>
+    <%= turbo_stream.prepend "new_onepharma_specialty", inline: "<div data-formtoggle-target=''></div>" %>
+<% else %>
+    <%= turbo_stream.replace 'new_onepharma_specialty', partial: "specialties/form" %>
+<% end %>

@@ -1,0 +1,8 @@
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+
+<% if @specialty.valid? %>
+	<%= turbo_stream.replace 'specialties_section', partial: "professionals/specialty_section" %>
+	<%= turbo_stream.update "generic_responsive_modal", inline: "<div data-modal-target='close'></div>" %>
+<% else %>
+	<%= turbo_stream.replace "generic_responsive_modal", partial: "specialties/edit_form", locals: { elem: @specialty } %>
+<% end %>

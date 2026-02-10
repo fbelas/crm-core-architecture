@@ -1,0 +1,39 @@
+<div id="competencies_section" >
+    <h4> <%= I18n.t("label_competencies.competencies") %> </h4>
+    <div class="row" data-controller="formtoggle">
+        <div class="col-12">
+            <% if current_user.can_do?("database_edit") %>
+                <div data-formtoggle-target="hideable" class="form-group ">
+                    <button  data-action="formtoggle#toggleTargets" id="add_department" class="btn btn-dark_green waves-effect waves-light hideable" do  >
+                    <span class="btn-label">
+                        <i class="fa-solid fa-plus-large"></i>
+                    </span>
+                        <%= I18n.t("label_competencies.new_competency") %>
+                    </button>
+                </div>
+            <% end %>
+            <div data-formtoggle-target="hideable" hidden>
+                <%= render "competencies/form" %>
+            </div>
+            <hr>
+            <div id="professional_competency_list">
+                <table class="border table table-striped table-bordered no-footer" cellspacing="0" role="grid" data-controller="" aria-describedby="datatable-buttons_info">
+                    <thead>
+                        <tr>
+                            <th> <%= I18n.t("label_competencies.rank") %> </th>
+                            <th> <%= I18n.t("label_competencies.competency") %> </th>
+                            <% if current_user.can_do?("database_edit") %>
+                                <th></th>
+                            <% end %>
+                        </tr>
+                    </thead>
+                    <tbody id="competency" >
+                        <% @professional.competencies.order(SPECIALTY_RANK: :asc).each do |elem| %>
+                            <%= render "professionals/competency_table_line", elem: elem %>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

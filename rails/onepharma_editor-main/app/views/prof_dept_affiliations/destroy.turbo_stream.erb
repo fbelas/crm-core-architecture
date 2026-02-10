@@ -1,0 +1,3 @@
+<%= turbo_stream.remove dom_id(@prof_dept_affiliation) %>
+<%= turbo_stream.replace 'flash_notification', partial: "shared/flash_notification" %>
+<%= turbo_stream.replace('institution_affiliation_list_container', partial: "professionals/prof_dept_affiliations_section_table") %>

@@ -1,0 +1,68 @@
+<div id="tickets_section">
+    <div class="row" id="">
+        <div class="col-md-0">
+            <h4>
+                <%#=I18n.t("label_tickets.ticket") %>
+            </h4>
+        </div>
+        <div class="col-md-12">
+            <% if current_user.can_do?("create_tickets") %>
+                <%= link_to new_ticket_form_path(ticket_object_type: "Onepharma::Professional", ticket_object_id: @ticket_object_id), class: "btn btn-dark_green waves-effect waves-light",
+                                    data: {turbo_frame: "generic_responsive_modal"} do  %>
+                                        <span class="btn-label" style="vertical-align: middle;"><i class="fa-solid fa-clipboard-list" style="font-size: 14px;"></i>
+                                        </span><%=I18n.t("label_tickets.open_ticket") %>
+                                <% end %>
+            <% elsif %>
+                <i class="fa-solid fa-clipboard-list" style="font-size: 25px;" aria-hidden="true"></i>
+                <a style="font-size: 15px;"> <%= I18n.t("label_tickets.tickets") %> </a>
+            <% end %>
+        </div>
+    </div>
+    <br>
+    <div id="">
+        <table class="border table table-striped table-bordered no-footer dataTable">
+            <% if @object_open_tickets.present? %>
+                <% @object_open_tickets.each do |ticket| %>
+                    <tr>
+                        <td style="text-align: center;">
+                            <%= ticket.id%>
+                        </td>
+                        <td style="text-align: center;">
+                            <%= ticket.created_at%>
+                        </td>
+                        <td style="text-align: center;">
+                            <%= I18n.t("label_tickets.#{ticket.status}") %>
+                            <% if ticket.attachment.attached? %>
+                                <i class="fa-solid fa-paperclip" style="font-size: 20px;"></i>
+                            <% end %>
+                        </td>
+                        <td style="width: 25%; text-align: center;">
+                            <% if current_user.can_do?("manage_tickets") || current_user.can_do?("manage_only_team_tickets") || ticket.status == "OPEN"%>
+                                <%= link_to edit_ticket_form_path(ticket_id: ticket.id, object_location: "professionals/tickets_section", object_to_replace: "tickets_section" ),
+                                            class: "btn btn-dark_green waves-effect waves-light",
+                                            data: { turbo_frame: "generic_responsive_modal"} do %>
+                                    <i class="fa-solid fa-pencil" style="font-size: 12px;"></i>
+                                <% end %>
+                                <% if (((current_user.can_do?("manage_tickets") || current_user.can_do?("manage_only_team_tickets")) || (current_user.can_do?("create_tickets"))) && ticket.status == "OPEN") %>
+                                    <%= link_to ticket_path(ticket.id, object_location: "professionals/tickets_section", object_to_replace: "tickets_section"),
+                                                class: "btn btn-dark_danger inactive_button_border",
+                                                data:{turbo_confirm: t("popup_alerts.confirm_delete_ticket"), turbo_method: :delete} do  %>
+                                        <span><i class="fa-solid fa-trash" style="font-size: 12px;"></i></span>
+                                    <% end %>
+                                <% end %>
+                            <% elsif current_user.can_do?("create_tickets") %>
+                                <%= link_to show_ticket_form_path(ticket_id: ticket.id),
+                                                class: "btn btn-dark_green waves-effect waves-light",
+                                                style: "cursor: zoom-in",
+                                                title: "title='<%= ticket.content %'>",
+                                                data: { turbo_frame: "generic_responsive_modal" } do %>
+                                                    <i class="fa-solid fa-eye" style="font-size: 12px;"></i>
+                                                <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            <% end %>
+        </table>
+    </div>
+</div>

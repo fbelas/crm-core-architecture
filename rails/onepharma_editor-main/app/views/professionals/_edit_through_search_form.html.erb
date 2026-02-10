@@ -1,0 +1,86 @@
+<%= turbo_frame_tag "generic_responsive_modal" do %>
+<style>
+    hr {
+        height: 2px;
+        background-color: #5fbeaa;
+    }
+</style>
+
+    <div class="modal-dialog" style="max-width: 1500px !important; background: #303841 !important;">
+        <div class="modal-content container-fluid" style="background: #303841;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: bolder; font-size: 30px;">
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div>
+                        <h4>
+                            <i class="fa-solid fa-file-user"></i> <%= @professional.FULL_NAME %>
+                        </h4>
+                        <h5>
+                            <%= I18n.t("label_institutions.onepharma_id") %> -
+                            <%= @professional.CUSTOMER_ID %>
+                        </h5>
+                        <h6>
+                            <%= I18n.t("label_institutions.updated_at")%>
+                            <%= @professional.UPDATE_DATE %>
+                        </h6>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+                <hr>
+            </div>
+            <ul class="nav nav-tabs tabs-bordered">
+                <li class="nav-item">
+                    <a href="#basic_information_fields-b1" data-toggle="tab" aria-expanded="false" class="nav-link active show" style="color:#caced2 !important">
+                        <%= I18n.t("label_institutions.data") %>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#departments-b1" data-toggle="tab" aria-expanded="true" class="nav-link" style="color:#caced2 !important">
+                        <%= I18n.t("label_departments.departments") %>
+                    </a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="basic_information_fields-b1">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-box">
+                                <%= render "professionals/edit_form" %>
+                            </div>
+                        </div>
+                        <div class="col-6" >
+                            <div class="card-box">
+                                <%= render 'professionals/contact_section'%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-box">
+                                <%= render 'professionals/specialty_section'%>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card-box">
+                                <%= render 'professionals/competency_section' %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="departments-b1">
+                    <div class="card-box">
+                        <%= render 'professionals/prof_dept_affiliations_section' %>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+<% end %>

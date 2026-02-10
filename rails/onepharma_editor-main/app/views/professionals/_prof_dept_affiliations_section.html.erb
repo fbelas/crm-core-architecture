@@ -1,0 +1,24 @@
+<div id= "institution_department_professionals_section">
+    <h4> <%= I18n.t("label_affiliations.affiliations") %> </h4>
+    <div class="row" data-controller="formtoggle">
+        <div class="col-12">
+            <% if current_user.can_do?("database_edit") %>
+                <div data-formtoggle-target="hideable" class="form-group ">
+                    <button  data-action="formtoggle#toggleTargets" id="add_affiliation" class="btn btn-dark_green waves-effect waves-light hideable" do  >
+                    <span class="btn-label">
+                        <i class="fa-solid fa-plus-large"></i>
+                    </span>
+                        <%= I18n.t("label_affiliations.new_affiliation") %>
+                    </button>
+                </div>
+            <% end %>
+            <div data-formtoggle-target="hideable" hidden>
+                <%= render "prof_dept_affiliations/form" %>
+            </div>
+            <hr>
+            <div>
+                <%= render "professionals/prof_dept_affiliations_section_table" %>
+            </div>
+        </div>
+    </div>
+</div>

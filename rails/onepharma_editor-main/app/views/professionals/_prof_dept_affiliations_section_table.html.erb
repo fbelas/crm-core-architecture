@@ -1,0 +1,36 @@
+<div id="institution_affiliation_list_container">
+    <table id="institution_affiliation_list"
+        class="border table table-striped table-bordered no-footer"
+        cellspacing="0"
+        role="grid"
+        data-controller="datatable"
+        data-quick-search='{
+                "field_1":"1", "value_1":"<%= I18n.t("label_professionals.ACTV")%>", "button_text_1":"<%= I18n.t("label_institutions.filter_only_active")%>", "filter_default_1":"true"
+                }'
+        data-datatable-order-by-column-value="3"
+        aria-describedby="datatable-buttons_info"
+        style="width:100%;">
+        <thead>
+            <tr>
+                <th> <%= I18n.t("label_prof_dept_affiliations.owner") %> </th>
+                <th>  <%= I18n.t("label_prof_dept_affiliations.status") %> </th>
+                <th>  <%= I18n.t("label_prof_dept_affiliations.affiliation_role_1") %> </th>
+                <th> <%= I18n.t("label_prof_dept_affiliations.first_name") %> </th>
+                <th> <%= I18n.t("label_prof_dept_affiliations.last_name") %> </th>
+                <th> <%= I18n.t("label_prof_dept_affiliations.affiliation_id") %></th>
+                <th> <%= I18n.t("label_prof_dept_affiliations.status_change_date") %></th>
+                <th> <%= I18n.t("label_prof_dept_affiliations.created_at") %></th>
+                <% if current_user.can_do?("database_edit") %>
+                    <th></th>
+                <% end %>
+            </tr>
+        </thead>
+        <tbody id="affiliations" >
+            <% @professional.prof_dept_affiliations.each do |elem| %>
+                <% if @departments_list_hash[elem.TO_CUSTOMER_ID].dept_inst_affiliations[0].present? %>
+                    <%= render "professionals/prof_dept_affiliations_section_table_line", elem: elem %>
+                <% end %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
